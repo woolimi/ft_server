@@ -1,0 +1,2 @@
+docker build -t fs . && clear && docker run --rm -it -p 80:80 fs 
+

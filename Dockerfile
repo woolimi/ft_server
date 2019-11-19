@@ -1,8 +1,31 @@
 FROM debian:buster
-MAINTAINER Woolim PARK <wpark.42.fr>
-COPY src/wordpress.sql ./root/
-COPY src/nginx-host-conf ./root/
-COPY src/wordpress.tar.gz ./root/
-COPY src/config.inc.php ./root/
-COPY src/start.sh ./
-CMD bash start.sh && tail -f /dev/null
+
+MAINTAINER Woolim PARK <wpark@student.42.fr>
+
+RUN apt-get update && apt-get upgrade -y \
+&& apt-get -y install wget \
+&& apt-get -y install nginx \
+&& apt-get -y install php-mbstring php-zip php-gd php-xml php-pear php-gettext php-cli php-fpm php-cgi \
+&& apt-get -y install php-mysql \
+&& apt-get -y install mariadb-server \
+&& apt-get clean -y
+
+COPY srcs/php.ini /tmp/php.ini
+COPY srcs/wordpress.tar.gz /tmp/wordpress.tar.gz
+COPY srcs/wp-config.php /tmp/wp-config.php
+COPY srcs/nginx_config /tmp/nginx_config
+COPY srcs/index.php /tmp/index.php
+COPY srcs/phpmyadmin_config /tmp/config.inc.php
+COPY srcs/start.sh /tmp/start.sh 
+
+EXPOSE 80
+EXPOSE 443
+#ENV MYSQL_ROOT_PASSWORD=root
+#ENV MYSQL_USER=root
+#ENV MYSQL_PASSWORD=password
+
+CMD bash /tmp/start.sh && bash
+
+#docker build -t (img_name) (Dockerfile path)
+#docker run --rm -it (img or cnt name)
+
