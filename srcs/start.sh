@@ -18,10 +18,6 @@ echo "CREATE DATABASE wordpress;" | mysql -u root
 echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'wpark'@'localhost' IDENTIFIED BY '1234'" | mysql -u root
 echo "FLUSH PRIVILEGES;" | mysql -u root
 
-#MYSQL SETUP ROOT PASSWORD
-#echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';" | mysql -u root
-#echo "FLUSH PRIVILEGES;" | mysql -u root
-
 #WORDPRESS INSTALLATION
 mkdir /var/www/localhost/wordpress
 tar -xf /tmp/wordpress.tar.gz -C /var/www/localhost/
@@ -33,19 +29,22 @@ wget https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-english.tar.
 tar xvf phpMyAdmin-4.9.1-english.tar.gz
 mv phpMyAdmin-4.9.1-english/ /var/www/localhost/phpmyadmin
 
+#SSL
+mkdir ~/CA
+cd ~/CA
+mv /tmp/mkcert .
+chmod +x mkcert
+./mkcert -install
+./mkcert localhost
+rm ./mkcert
 
-#SSL 
-
-#mkdir ~/mkcert
-#cd ~/mkcert
-#wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
-#mv mkcert-v1.1.2-linux-amd64 mkcert
-#chmod +x mkcert
-#./mkcert -install
-#./mkcert localhost
-#rm ~/mkcert/mkcert
+#index
+mkdir /var/www/localhost/index
+cd /var/www/localhost/index
+touch file1.txt
+touch file2.txt
+touch file3.txt
 
 #START NGINX AND CLEAN
-
-#rm /tmp/*
+rm /tmp/*
 service nginx restart

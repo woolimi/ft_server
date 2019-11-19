@@ -1,2 +1,1 @@
-docker build -t fs . && clear && docker run --rm -it -p 80:80 fs 
-
+docker build -t ft . && clear && docker run --rm -it -p 80:80 -p 443:443 ft

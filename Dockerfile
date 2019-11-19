@@ -15,17 +15,46 @@ COPY srcs/wordpress.tar.gz /tmp/wordpress.tar.gz
 COPY srcs/wp-config.php /tmp/wp-config.php
 COPY srcs/nginx_config /tmp/nginx_config
 COPY srcs/index.php /tmp/index.php
-COPY srcs/phpmyadmin_config /tmp/config.inc.php
-COPY srcs/start.sh /tmp/start.sh 
+COPY srcs/start.sh /tmp/start.sh
+COPY srcs/mkcert-v1.1.2-linux-amd64 /tmp/mkcert
 
 EXPOSE 80
 EXPOSE 443
-#ENV MYSQL_ROOT_PASSWORD=root
-#ENV MYSQL_USER=root
-#ENV MYSQL_PASSWORD=password
 
 CMD bash /tmp/start.sh && bash
 
-#docker build -t (img_name) (Dockerfile path)
-#docker run --rm -it (img or cnt name)
-
+#### DOCKER COMMAND
+#
+# 1. download image from dockerhub
+# docker pull debian:buster
+#
+# 2. see docker process
+# docker ps (-a)
+#
+# 3. see images
+# docker images
+#
+# 4. see containers
+# docker contianer ls -a
+# 
+# 5. build another image using Dockerfile
+# docker build --tag (tag_name) (Dockefile_path) 
+#
+# 6. create container by image
+# docker create (image_name)
+#
+# 7. execute container
+# docker start (container_name)
+#
+# 8. stop container
+# docker stop (container_name)
+#
+# 9. enter into container
+# docker attatch (container_name)
+#
+# 10.make container && execute container
+# docker run --rm -it (image or container name)
+#
+# 11.communicate container <-> host 
+# docker cp [host file path] [container name]:[container file path]
+# docker cp [container name]:[container file path] [host file path]
