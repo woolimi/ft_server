@@ -21,7 +21,7 @@ COPY srcs/mkcert-v1.1.2-linux-amd64 /tmp/mkcert
 EXPOSE 80
 EXPOSE 443
 
-CMD bash /tmp/start.sh && bash
+CMD bash /tmp/start.sh && sleep infinity & wait
 
 #### DOCKER COMMAND
 #
